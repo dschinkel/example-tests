@@ -1,3 +1,5 @@
+// in this file, code written in: node.js, supertest.js, mocha.js, chai.js, ECMAScript 6, co.js
+
 'use strict';
 
 var co = require('co'),
