@@ -1,0 +1,63 @@
+Stories will provide you an example of how I use BDD to define the criteria for my stories.
+
+I then literally take the Gherkin and drive my code outside-in based on each scenario.
+
+
+
+Feature Summary
+
+As a consumer of the API
+I want to be able to call the API and pull back a people based on location
+
+Inputs / Outputs
+
+Inputs: locationId
+Outputs: a list of people data objects (see json below)
+
+Constraints / Filters / Rules
+
+The API will:
+
+* Provide the ability to specify a count of the number of people to be returned
+* Default the sort of people returned by Publish Date
+* Include logic to create the values for fields full name, listing, and short name
+
+
+Acceptance Criteria
+
+Scenario 1 (degenerate case): List all people where no people exist based on a specific location
+Given 0 people exist
+When listing all people filtered by specific location
+Then 0 people are found
+
+Scenario 2: List all people where one exists based on a specific location
+Given 1 people exists
+When listing all people filtered by specific locationId
+Then 1 people is found
+
+Scenario 3: List all people where many exists based on a specific location
+Given more than one person exists
+When listing all people filtered by specific locationId
+Then more than one person is found
+
+Scenario 4: List all people where many exists based on a specific location
+Given at least 18 people exist
+When listing all people filtered by specific locationId
+Then more than one person is found
+
+Scenario 5: List all people where many exists based on a specific location
+Given at least 18 people exist
+When listing all people filtered by specific locationId
+Then more than one person is found
+
+Scenario 6: List all people where many exists based on a specific location
+Given a specified count of people is requested to be returned
+When listing all people filtered by specific locationId
+Then the number of people returned is matches the number of people requested to be returned
+
+Scenario 7: List all people where many exists based on a specific location
+Given more than one person exists
+When listing all people filtered by specific locationId
+Then the list of people returned is sorted by Publish Date by default
+
+
