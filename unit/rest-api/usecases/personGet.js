@@ -7,6 +7,7 @@
 var co = require('co'),
     chai = require('chai'),
     should = chai.should(),
+    query = require('../../../src/database/postgreSQL/query-options'),
     inMemoryGateway = require('../../../test/test-doubles/gateways/inMemory-personGateway'),
     personGetUseCase = require('../../../src/usecases/personGet'),
     testUtil = require('../../../test/testUtilities');
@@ -59,50 +60,50 @@ describe('Person Use Case - Get Person by Location', co.wrap(function () {
         var locations = [];
 
         locations.push({
-            "city": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "urlSafeName": null
-            },
-            "state": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "code": null,
-                "urlSafeName": null
-            },
-            "country": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "code": null
-            }
-        });
+                "city": {
+                    "href": null,
+                    "id": null,
+                    "name": null,
+                    "urlSafeName": null
+                },
+                "state": {
+                    "href": null,
+                    "id": null,
+                    "name": null,
+                    "code": null,
+                    "urlSafeName": null
+                },
+                "country": {
+                    "href": null,
+                    "id": null,
+                    "name": null,
+                    "code": null
+                }
+            });
         locations.push({
-            "city": {
-                "href": null,
-                "id": locationId,
-                "name": null,
-                "urlSafeName": null
-            },
-            "state": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "code": null,
-                "urlSafeName": null
-            },
-            "country": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "code": null
-            }
-        });
+                "city": {
+                    "href": null,
+                    "id": locationId,
+                    "name": null,
+                    "urlSafeName": null
+                },
+                "state": {
+                    "href": null,
+                    "id": null,
+                    "name": null,
+                    "code": null,
+                    "urlSafeName": null
+                },
+                "country": {
+                    "href": null,
+                    "id": null,
+                    "name": null,
+                    "code": null
+                }
+            });
 
-        var person1 = testUtil.createPersonEntity(4, null);
-        var person2 = testUtil.createPersonEntity(6, locations);
+        var person1 = testUtil.createPersonEntity(4, null, null);
+        var person2 = testUtil.createPersonEntity(6, null, locations);
         testUtil.addPerson(person1, people);
         testUtil.addPerson(person2, people);
 
@@ -163,8 +164,8 @@ describe('Person Use Case - Get Person by Location', co.wrap(function () {
             }
         });
 
-        var person1 = testUtil.createPersonEntity(4, null);
-        var person2 = testUtil.createPersonEntity(6, locations);
+        var person1 = testUtil.createPersonEntity(4, null, null);
+        var person2 = testUtil.createPersonEntity(6, null ,locations);
         testUtil.addPerson(person1, people);
         testUtil.addPerson(person2, people);
 
@@ -225,8 +226,8 @@ describe('Person Use Case - Get Person by Location', co.wrap(function () {
             }
         });
 
-        var person1 = testUtil.createPersonEntity(4, null);
-        var person2 = testUtil.createPersonEntity(6, locations);
+        var person1 = testUtil.createPersonEntity(4, null, null);
+        var person2 = testUtil.createPersonEntity(6, null, locations);
         testUtil.addPerson(person1, people);
         testUtil.addPerson(person2, people);
 
@@ -242,7 +243,7 @@ describe('Person Use Case - Get Person by Location', co.wrap(function () {
     it('should format full name properly', co.wrap(function*(){
 
         var expectedFullName = 'Mr. Ross John \"RP\" (Smith) Perot MD';
-        var person = testUtil.createPersonEntity(4, null, 'Ross', 'John', 'Perot', 'Mr.', 'RP', 'Smith', 'MD');
+        var person = testUtil.createPersonEntity(4, null, null, 'Ross', 'John', 'Perot', 'Mr.', 'RP', 'Smith', 'MD');
         testUtil.addPerson(person, people);
 
         var responseModel = yield personGetUseCase.find(requestModel, queryOptions);
@@ -253,7 +254,7 @@ describe('Person Use Case - Get Person by Location', co.wrap(function () {
     it('should format short name properly', co.wrap(function*(){
 
         var expectedShortName = 'Ross John Smith';
-        var person = testUtil.createPersonEntity(4, null, 'Ross', 'John', 'Smith', null, null, null, null, null);
+        var person = testUtil.createPersonEntity(4, null, null, 'Ross', 'John', 'Smith');
         testUtil.addPerson(person, people);
 
         var responseModel = yield personGetUseCase.find(requestModel, queryOptions);
@@ -264,7 +265,7 @@ describe('Person Use Case - Get Person by Location', co.wrap(function () {
     it('should format list name properly', co.wrap(function*(){
 
         var expectedListName = 'Perot MD, Mr. Ross John \"RP\" Smith';
-        var person = testUtil.createPersonEntity(4, null, 'Ross', 'John', 'Perot', 'Mr.', 'RP', 'Smith', 'MD', null);
+        var person = testUtil.createPersonEntity(4, null, null, 'Ross', 'John', 'Perot', 'Mr.', 'RP', 'Smith', 'MD');
         testUtil.addPerson(person, people);
 
         var responseModel = yield personGetUseCase.find(requestModel, queryOptions);
@@ -272,27 +273,56 @@ describe('Person Use Case - Get Person by Location', co.wrap(function () {
         responseModel.people[0].name.list.should.equal(expectedListName);
     }));
 
+    it('should format picture url properly', co.wrap(function*(){
+
+        var expectedPictureUrl = 'www.xxxxx.com/link.asp?i=ls000000021109';
+        var externalLinks = testUtil.createExternalLinkEntity();
+
+        var person = testUtil.createPersonEntity(4, '000000021109', null, 'Ross', 'John', 'Perot', 'Mr.', 'RP', 'Smith', 'MD', null, null, externalLinks);
+        testUtil.addPerson(person, people);
+
+        var responseModel = yield personGetUseCase.find(requestModel, queryOptions);
+
+        responseModel.people[0].externalLinks.picture.should.equal(expectedPictureUrl);
+    }));
+
+    it('should format guestbook url properly', co.wrap(function*(){
+
+        var expectedGuestbookUrl = 'www.xxxxx.com/link.asp?i=gb000000021109';
+        var externalLinks = testUtil.createExternalLinkEntity();
+
+        var person = testUtil.createPersonEntity(4, '000000021109', null, 'Ross', 'John', 'Perot', 'Mr.', 'RP', 'Smith', 'MD', null, null, externalLinks);
+        testUtil.addPerson(person, people);
+
+        var responseModel = yield personGetUseCase.find(requestModel, queryOptions);
+
+        responseModel.people[0].externalLinks.guestbook.should.equal(expectedGuestbookUrl);
+    }));
+
     it('should append the http protocol and domain to portrait image urls for one or more people', co.wrap(function*(){
 
-        var images = [];
-        images.push({name: 'header', href: '/header.jpg'});
-        var person1 = testUtil.createPersonEntity(4, null, null, null, null, null, null, null, null, null, images);
-        images.push({name: 'logo', href: '/logo.jpg'});
-        var person2 = testUtil.createPersonEntity(8, null, null, null, null, null, null, null, null, null, images);
+        var images1 = [];
+        images1.push({name: 'header', href: '/header.jpg'});
+
+        var images2 = [];
+        images2.push({name: 'logo', href: '/logo.jpg'});
+
+        var person1 = testUtil.createPersonEntity(4, null, null, null, null, null, null, null, null, null, null, images1, null);
+        var person2 = testUtil.createPersonEntity(8, null, null, null, null, null, null, null, null, null, null, images2, null);
         testUtil.addPerson(person1, people);
         testUtil.addPerson(person2, people);
 
         var responseModel = yield personGetUseCase.find(requestModel, queryOptions);
 
         responseModel.people[0].portraitImages[0].href.should.contain.string('http://');
-        responseModel.people[1].portraitImages[1].href.should.contain.string('http://');
+        responseModel.people[1].portraitImages[0].href.should.contain.string('http://');
     }));
 
     it('should return correct status code for data found', co.wrap(function*(){
 
-        var person1 = testUtil.createPersonEntity(4, null, 'Ross', 'Perot');
+        var person1 = testUtil.createPersonEntity(4, null, null, 'Ross', 'Perot');
         testUtil.addPerson(person1, people);
-        var person2 = testUtil.createPersonEntity(6, null, 'Donald', 'Trump');
+        var person2 = testUtil.createPersonEntity(6, null, null, 'Donald', 'Trump');
         testUtil.addPerson(person2, people);
 
         var responseModel = yield personGetUseCase.find(requestModel, queryOptions);
@@ -311,8 +341,7 @@ describe('Person Use Case - Get Person by Location', co.wrap(function () {
         should.not.exist(responseModel.people);
     }));
 
-
-    it('should return the number of people requested to be returned', co.wrap(function*(){
+    it('should return the number of people requested by limit', co.wrap(function*(){
 
         var limit = 2;
 
@@ -337,8 +366,6 @@ describe('Person Use Case - Get Person by Location', co.wrap(function () {
         responseModel.people.should.have.length(limit);
     }));
 
-
-
     function setGateway(people) {
         inMemoryGateway.data(people);
         personGetUseCase.gateway(inMemoryGateway);
@@ -349,3 +376,4 @@ describe('Person Use Case - Get Person by Location', co.wrap(function () {
         queryOptions.limit = limit;
     };
 }));
+
