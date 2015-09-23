@@ -1,6 +1,8 @@
 # example-tests
 Just a repository of example tests where I test drove my code from these tests
 
+A lot of this currently is based off the Clean Architecture (Uncle Bob Martin / 8th Light).  You'll see use case interactors, boundary objects (controllers), etc.
+
 more to come...
 
 
