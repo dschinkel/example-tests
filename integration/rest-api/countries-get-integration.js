@@ -1,6 +1,10 @@
 // in this file, code written in: node.js, supertest.js, mocha.js, chai.js, ECMAScript 6, co.js
 
-// The real DB code that this hits is a PostgresSQL database
+// The real DB code that this hits is a PostgresSQL database and these tests varify that my REST endpoints work
+// with out having to pop open a browser or any other tool to verify.  I know that when I deploy to dev, qa, or whatever,
+// that I'm pretty confident things should just work and 100% of time they do when these tests pass.  The only time
+// these might not work is if QA messes up something on their end (DB or network issues, or whatever) or there is some environmental change that affect my tests
+// that is not in my control
 
 // NOTE: co-wrap here is necessary for ES6 mocha.js generator functions to work.
 
