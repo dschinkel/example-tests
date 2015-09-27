@@ -1,5 +1,7 @@
 // in this file, code written in: node.js, mocha.js, chai.js, ECMAScript 6, co.js
 
+// these are real tests I wrote as part of building out a REST API
+
 // NOTE: co-wrap here is necessary for ES6 mocha.js generator functions to work.
 
 'use strict';
