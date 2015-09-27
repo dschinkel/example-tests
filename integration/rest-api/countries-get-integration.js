@@ -7,8 +7,9 @@
    --- with out having to pop open a browser or any other tool to verify that calls work from the outside --- 
    
    Note: if you find yourself ALWAYS opening a browser to verify calls you might wanna ask yourself or your collegues  
-   But please ask yourself this....why????  Because it's not a big deal to open a browser and type the url or 
-   change the url?  um..ok..fine, I guess..
+   this: ....why????  Because it's not a big deal to open a browser and type the url or to change the url?  
+   
+   um..ok..fine, I guess..
    
    BUT..
    Why not just get into a habit of writing a quick integration test such as the below instead;
