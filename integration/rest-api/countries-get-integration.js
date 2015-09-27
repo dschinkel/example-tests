@@ -1,19 +1,27 @@
-// in this file, code written in: node.js, supertest.js, mocha.js, chai.js, ECMAScript 6, co.js
+/* in this file, code written in: node.js, supertest.js, mocha.js, chai.js, ECMAScript 6, co.js
 
-// Purpose of These Tests:  these are integreation tests to exercise the service running over a 
-// real node koa.js service against a real DB.
+   Purpose of These Tests:  these are integreation tests to exercise the service running over a 
+   real node koa.js service against a real DB.
 
-// The real DB code that this hits is a PostgresSQL database and these tests varify that my REST endpoints work
-// ---with out having to pop open a browser or any other tool to verify that calls work from the outside --- 
-// Note: if you find yourself ALWAYS opening a browser to verify calls you might wanna ask yourself or your collegues  
-// why?  why not just get into a habit of writing a quick integration test such as the below instead, must faster and can be automted
+   The real DB code that this hits is a PostgresSQL database and these tests varify that my REST endpoints work
+   --- with out having to pop open a browser or any other tool to verify that calls work from the outside --- 
+   
+   Note: if you find yourself ALWAYS opening a browser to verify calls you might wanna ask yourself or your collegues  
+   But please ask yourself this....why????  Because it's not a big deal to open a browser and type the url or 
+   change the url?  um..ok..fine, I guess..
+   
+   BUT..
+   Why not just get into a habit of writing a quick integration test such as the below instead;
+   must faster and can be automted and it takes you 2 seconds using a gulp or grunt command to do exactly the same
+   thing your'e doing manually via a browser.  You don't have to type anything (no changing urls in the browser), 
+   you just run them.
 
-// With these tests, I know that when I deploy to dev, qa, or whatever,
-// that I'm pretty confident things should just work from a user calling the API running in the context of a real
-// node web service and real DB.  The only time these might fail is if QA messes up something on their end 
-// (DB or network issues, or whatever) or there is some environmental change that affect my tests
+   With these tests, I know that when I deploy to dev, qa, or whatever,
+   that I'm pretty confident things should just work from a user calling the API running in the context of a real
+   node web service and real DB.  The only time these might fail is if QA messes up something on their end 
+   (DB or network issues, or whatever) or there is some environmental change that affect my tests
 
-// NOTE: co-wrap here is necessary for ES6 mocha.js generator functions to work.
+   NOTE: co-wrap here is necessary for ES6 mocha.js generator functions to work. */
 
 'use strict';
 
