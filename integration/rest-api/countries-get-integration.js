@@ -1,5 +1,7 @@
 // in this file, code written in: node.js, supertest.js, mocha.js, chai.js, ECMAScript 6, co.js
 
+// The real DB code that this hits is a PostgresSQL database
+
 // NOTE: co-wrap here is necessary for ES6 mocha.js generator functions to work.
 
 'use strict';
