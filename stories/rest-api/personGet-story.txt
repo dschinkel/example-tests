@@ -31,7 +31,7 @@ When listing all people filtered by specific location
 Then 0 people are found
 
 Scenario 2: List all people where one exists based on a specific location
-Given 1 people exists
+Given 1 person exists
 When listing all people filtered by specific locationId
 Then 1 person is found
 
