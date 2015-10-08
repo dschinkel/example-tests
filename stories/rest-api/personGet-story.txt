@@ -2,7 +2,13 @@
 
 *I then literally take the Gherkin and drive my code outside-in based on each scenario.
 
-* Note: the degenerate case below I used to push me to build out some initial boilerplate/infrastructure which is common to do if necessary.  So the first test I write often times ends up in me creating of some new new modules, entities, etc. to get that test to pass (of course very minimal boilerplate).  Then the tests thereafter force me to test drive the behavior.  I find that sometimes I might skip doing the next test such as the "given one person exists, one person is returned" if that test doesn't really force any new behavior to be written (kinda redundant if that's the case) and depending on the sue case, I might instead move to a higher level test such as for example "based on a specific location" since that forces me to add some behavior on how I filter by location.
+* Note: the degenerate case below I used to push me to build out some initial boilerplate/infrastructure which is common 
+to do if necessary.  So the first test I write often times ends up in me creating of some new new modules, entities, etc. 
+to get that test to pass (of course very minimal boilerplate).  Then the tests thereafter force me to test drive the behavior.
+I find that sometimes I might skip doing the next test such as the "given one person exists, one person is returned" if that
+test doesn't really force any new behavior to be written (kinda redundant if that's the case) and depending on the sue case, I
+might instead move to a higher level test such as for example "based on a specific location" since that forces me to add some
+behavior on how I filter by location.
 ---------------------------------------------------------------------------------------------------------------------
 
 
