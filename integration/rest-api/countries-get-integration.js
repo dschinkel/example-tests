@@ -1,6 +1,6 @@
 /* in this file, code written in: node.js, supertest.js, mocha.js, chai.js, ECMAScript 6, co.js
 
-   Purpose of These Tests:  these are integreation tests to exercise the service running over a 
+   Purpose of These Tests:  1-2 integreation tests per API endpoint contract to exercise the service running over a 
    real node koa.js service against a real DB.
 
    The real DB code that this hits is a PostgresSQL database and these tests varify that my REST endpoints work
@@ -15,15 +15,15 @@
    BUT..
    Why not just get into a habit of writing a quick integration test such as the below instead;
    must faster and can be automted and it takes you 2 seconds using a gulp or grunt command to do exactly the same
-   thing your'e doing manually via a browser.  You don't have to type anything (no changing urls in the browser), 
-   you just run them.
+   thing your'e doing manually via a browser. 
 
    With these tests, I know that when I deploy to dev, qa, or whatever,
-   that I'm pretty confident things should just work from a user calling the API running in the context of a real
-   node web service and real DB.  The only time these might fail is if QA messes up something on their end 
-   (DB or network issues, or whatever) or there is some environmental change that affect my tests
+   that I'm pretty confident things should just work as a consumer of the API.
 
-   NOTE: co-wrap here is necessary for ES6 mocha.js generator functions to work. */
+   NOTE: co-wrap here is necessary for ES6 mocha.js generator functions to work.  co-wrap returns a promise.
+         if you try running mocha generator (ES6) tests without co-wrap, the Done() will be called before the
+         async operation is done (before the response comes back from the server) making your tests useless. 
+         By adding co-wrap, the assertions will wait until the yield is done, then run assertions here. */
 
 'use strict';
 
