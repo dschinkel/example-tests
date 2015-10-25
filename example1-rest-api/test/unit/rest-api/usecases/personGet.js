@@ -23,12 +23,10 @@ describe('Person Use Case - Get Person by Location', () =>  {
     var queryOptions;
     var limit = 18;
 
-
     beforeEach(function() {
         people = [];
         requestModel = testUtil.createPersonRequestModel();
         setGateway(people);
-
         setQueryOptions()
     });
 
@@ -163,7 +161,8 @@ describe('Person Use Case - Get Person by Location', () =>  {
         var expectedPictureUrl = 'www.xxxxx.com/link.asp?i=ls000000021109';
         var externalLinks = testUtil.createExternalLinkEntity();
 
-        var person = testUtil.createPersonEntity(4, '000000021109', null, 'Ross', 'John', 'Perot', 'Mr.', 'RP', 'Smith', 'MD', null, null, externalLinks);
+        var person = testUtil.createPersonEntity(4, '000000021109', null, 'Ross', 'John', 'Perot',
+                                                 'Mr.', 'RP', 'Smith', 'MD', null, null, externalLinks);
         testUtil.addPerson(person, people);
 
         var responseModel = yield personGetUseCase.find(requestModel, queryOptions);
@@ -176,7 +175,8 @@ describe('Person Use Case - Get Person by Location', () =>  {
         var expectedGuestbookUrl = 'www.xxxxx.com/link.asp?i=gb000000021109';
         var externalLinks = testUtil.createExternalLinkEntity();
 
-        var person = testUtil.createPersonEntity(4, '000000021109', null, 'Ross', 'John', 'Perot', 'Mr.', 'RP', 'Smith', 'MD', null, null, externalLinks);
+        var person = testUtil.createPersonEntity(4, '000000021109', null, 'Ross', 'John', 'Perot', 'Mr.',
+                                                 'RP', 'Smith', 'MD', null, null, externalLinks);
         testUtil.addPerson(person, people);
 
         var responseModel = yield personGetUseCase.find(requestModel, queryOptions);
@@ -192,8 +192,10 @@ describe('Person Use Case - Get Person by Location', () =>  {
         var images2 = [];
         images2.push({name: 'logo', href: '/logo.jpg'});
 
-        var person1 = testUtil.createPersonEntity(4, null, null, null, null, null, null, null, null, null, null, images1, null);
-        var person2 = testUtil.createPersonEntity(8, null, null, null, null, null, null, null, null, null, null, images2, null);
+        var person1 = testUtil.createPersonEntity(4, null, null, null, null, null, null,
+                                                  null, null, null, null, images1, null);
+        var person2 = testUtil.createPersonEntity(8, null, null, null, null, null, null,
+                                                  null, null, null, null, images2, null);
         testUtil.addPerson(person1, people);
         testUtil.addPerson(person2, people);
 
@@ -233,11 +235,9 @@ describe('Person Use Case - Get Person by Location', () =>  {
         var person1 = testUtil.createPersonEntity(4);
         var person2 = testUtil.createPersonEntity(6);
         var person3 = testUtil.createPersonEntity(8);
-        var person4 = testUtil.createPersonEntity(10);
         testUtil.addPerson(person1, people);
         testUtil.addPerson(person2, people);
         testUtil.addPerson(person3, people);
-        testUtil.addPerson(person4, people);
 
         var queryOptions = requestModel.params.query;
         queryOptions.limit = limit;
@@ -286,7 +286,6 @@ describe('Person Use Case - Get Person by Location', () =>  {
                 "code": countryCode
             }
         };
-
     }
 });
 
