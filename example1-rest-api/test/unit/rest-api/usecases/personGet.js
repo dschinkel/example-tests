@@ -58,51 +58,12 @@ describe('Person Use Case - Get Person by Location', () =>  {
 
     it('should return people filtered by locationId for city', co.wrap(function *(){
 
-        var locationId = 222;
+        var cityId = 222;
         var locations = [];
 
-        locations.push({
-                "city": {
-                    "href": null,
-                    "id": null,
-                    "name": null,
-                    "urlSafeName": null
-                },
-                "state": {
-                    "href": null,
-                    "id": null,
-                    "name": null,
-                    "code": null,
-                    "urlSafeName": null
-                },
-                "country": {
-                    "href": null,
-                    "id": null,
-                    "name": null,
-                    "code": null
-                }
-            });
-        locations.push({
-                "city": {
-                    "href": null,
-                    "id": locationId,
-                    "name": null,
-                    "urlSafeName": null
-                },
-                "state": {
-                    "href": null,
-                    "id": null,
-                    "name": null,
-                    "code": null,
-                    "urlSafeName": null
-                },
-                "country": {
-                    "href": null,
-                    "id": null,
-                    "name": null,
-                    "code": null
-                }
-            });
+        locations.push(createLocation());
+        locations.push(createLocation(cityId, null, null, null, null, null,
+                                      null, null, null, null, null, null, null));
 
         var person1 = testUtil.createPersonEntity(4, null, null);
         var person2 = testUtil.createPersonEntity(6, null, locations);
