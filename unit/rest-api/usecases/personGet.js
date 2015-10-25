@@ -15,7 +15,7 @@ var co = require('co'),
     testUtil = require('../../../test/testUtilities');
 
 
-describe('Person Use Case - Get Person by Location', co.wrap(function () {
+describe('Person Use Case - Get Person by Location', () =>  {
 
     var people;
     var requestModel;
@@ -377,5 +377,5 @@ describe('Person Use Case - Get Person by Location', co.wrap(function () {
         queryOptions = requestModel.params.query;
         queryOptions.limit = limit;
     };
-}));
+});
 
