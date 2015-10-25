@@ -120,51 +120,12 @@ describe('Person Use Case - Get Person by Location', () =>  {
 
     it('should return people filtered by locationId for state', co.wrap(function *(){
 
-        var locationId = 222;
+        var stateId = 222;
         var locations = [];
 
-        locations.push({
-            "city": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "urlSafeName": null
-            },
-            "state": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "code": null,
-                "urlSafeName": null
-            },
-            "country": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "code": null
-            }
-        });
-        locations.push({
-            "city": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "urlSafeName": null
-            },
-            "state": {
-                "href": null,
-                "id": locationId,
-                "name": null,
-                "code": null,
-                "urlSafeName": null
-            },
-            "country": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "code": null
-            }
-        });
+        locations.push(createLocation());
+        locations.push(createLocation(null, null, null, null, stateId, null,
+                                      null, null, null, null, null, null, null));
 
         var person1 = testUtil.createPersonEntity(4, null, null);
         var person2 = testUtil.createPersonEntity(6, null ,locations);
@@ -182,51 +143,12 @@ describe('Person Use Case - Get Person by Location', () =>  {
 
     it('should return people filtered by locationId for country', co.wrap(function *(){
 
-        var locationId = 222;
+        var countryId = 222;
         var locations = [];
 
-        locations.push({
-            "city": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "urlSafeName": null
-            },
-            "state": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "code": null,
-                "urlSafeName": null
-            },
-            "country": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "code": null
-            }
-        });
-        locations.push({
-            "city": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "urlSafeName": null
-            },
-            "state": {
-                "href": null,
-                "id": null,
-                "name": null,
-                "code": null,
-                "urlSafeName": null
-            },
-            "country": {
-                "href": null,
-                "id": locationId,
-                "name": null,
-                "code": null
-            }
-        });
+        locations.push(createLocation());
+        locations.push(createLocation(null, null, null, null, null, null, null,
+                                      null, null, countryId, null, null, null));
 
         var person1 = testUtil.createPersonEntity(4, null, null);
         var person2 = testUtil.createPersonEntity(6, null, locations);
@@ -368,6 +290,7 @@ describe('Person Use Case - Get Person by Location', () =>  {
         responseModel.people.should.have.length(limit);
     }));
 
+
     function setGateway(people) {
         inMemoryGateway.data(people);
         personGetUseCase.gateway(inMemoryGateway);
@@ -377,5 +300,32 @@ describe('Person Use Case - Get Person by Location', () =>  {
         queryOptions = requestModel.params.query;
         queryOptions.limit = limit;
     };
+
+    function createLocation(cityId, cityHref, cityName, cityUrlSafeName,
+                            stateId, stateCode, stateHref, stateName, stateUrlSafeName,
+                            countryId, countryHref, countryName, countryCode){
+        return {
+            "city": {
+                "href": cityHref,
+                "id": cityId,
+                "name": cityName,
+                "urlSafeName": cityUrlSafeName
+            },
+            "state": {
+                "href": stateHref,
+                "id": stateId,
+                "name": stateName,
+                "code": stateCode,
+                "urlSafeName": stateUrlSafeName
+            },
+            "country": {
+                "href": countryHref,
+                "id": countryId,
+                "name": countryName,
+                "code": countryCode
+            }
+        };
+
+    }
 });
 
