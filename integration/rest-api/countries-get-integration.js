@@ -33,7 +33,7 @@ var co = require('co'),
     app = require('../../app'),
     sharedTests = require('../unit/shared/api-service-test');
 
-describe('Countries Endpoint - Integration Test', function(){
+describe('Countries Endpoint - Integration Test', () => {
     sharedTests.shouldHaveAWorkingService();
 
     var request = require('supertest-koa-agent')(app.koaApp);
