@@ -31,6 +31,8 @@ Given 0 people exist
 When listing all people filtered by specific location
 Then 0 people are found
 
+* Note to my github viewers: "degenerate case" means that this is the scenario that will force you during test driven to create some initial boilerplate code.  While this scenario has no real feature, it forces you to start at the simplest possible piece of code, and that is, some initial boilerplate and infrastructure needed for you to move onto subsequent tests
+
 Scenario 2: List all people where one exists based on a specific location
 Given 1 person exists
 When listing all people filtered by specific locationId
