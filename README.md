@@ -1,5 +1,5 @@
 # example-tests
-Just a repository of real world example tests where I test drove my SUT code from these tests
+A repository of real world example tests where I test drove my SUT code from these tests
 
 A lot of this currently is based off the Hexagonal Architecture & Clean Architecture concepts.  
 
