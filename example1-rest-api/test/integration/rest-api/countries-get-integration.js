@@ -47,7 +47,7 @@ describe('Countries Endpoint - Integration Test', () => {
     }));
 });
 
-describe.skip('Cities Endpoint - Integration Test', function(){
+describe.skip('Cities Endpoint - Integration Test', () => {
    
    it('should find no cities for invalid city id', co.wrap(function *(){
         var uri = '/cities/1';
